@@ -1,8 +1,17 @@
 const express = require('express');
 const app = express();
 
+
+const userRoutes = require('./routes/user')
+
+// const bodyParser = require('body-parser');
+
 const helmet = require("helmet");
 app.use(helmet());
+
+
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 
 
   // Ces headers permettent :
@@ -35,5 +44,8 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   console.log('Réponse envoyée avec succès !');
 });
+
+
+app.use('/api/user', userRoutes);
 
 module.exports = app;
