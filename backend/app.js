@@ -2,16 +2,16 @@ const express = require('express');
 const app = express();
 
 
-const userRoutes = require('./routes/user')
+const userRoutes = require('./routes/user.js')
 
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 const helmet = require("helmet");
 app.use(helmet());
 
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 
   // Ces headers permettent :
@@ -26,26 +26,26 @@ app.use(helmet());
 });
 
 
-app.use((req, res, next) => {
-  console.log('Requête reçue !');
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log('Requête reçue !');
+//   next();
+// });
 
-app.use((req, res, next) => {
-  res.status(201);
-  next();
-});
+// app.use((req, res, next) => {
+//   res.status(201);
+//   next();
+// });
 
-app.use((req, res, next) => {
-  res.json({ message: 'Votre requête a bien été reçue !' });
-  next();
-});
+// app.use((req, res, next) => {
+//   res.json({ message: 'Votre requête a bien été reçue !' });
+//   next();
+// });
 
-app.use((req, res, next) => {
-  console.log('Réponse envoyée avec succès !');
-});
+// app.use((req, res, next) => {
+//   console.log('Réponse envoyée avec succès !');
+// });
 
 
-app.use('/api/user', userRoutes);
+app.use('/api', userRoutes);
 
 module.exports = app;
