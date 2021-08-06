@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const jwtUtils = require('../utils/jwt.utils');
 
 const models = require('../models');
 
@@ -14,7 +14,7 @@ module.exports = {
         let bio = req.body.bio;
 
         if (email == null || username == null || password == null) {
-            return res.status(400).json({ 'error': 'missing parameters' });
+            return res.status(400).json({ 'erreur': 'Il manque des parametres' });
         }
 
         // TODO verify pseudo length, mail regexp, password etc.
@@ -36,7 +36,7 @@ module.exports = {
                             .then(function (newUser) {
                                 return res.status(201).json({
                                     'userID': newUser.id
-                                })
+                                });
                             })
                             .catch(function(err) {
                                 return res.status(500).json({ 'erreur': 'vous ne pouvez pas ajouter d`utlisateur' });
@@ -50,6 +50,42 @@ module.exports = {
 
 
     login: function (req, res) {
+
+        let email = req.body.email;
+        let password = req.body.password;
+
+        if (email == null || password == null) {
+            return res.status(400).json({ 'erreur': 'Il manque des parametres' });
+        }
+
+        // TODO verify pseudo length, mail regexp, password etc.
+
+
+
+        models.User.findOne({
+            where: { email: email }
+        })
+        .then(function (userFound) {
+            if (userFound) {
+                bcrypt.compare(password, userFound.password, function(errBcrypt, resBycrypt) {
+                    if (resBycrypt) {
+                        return res.status(200).json ({
+                            'userID': userFound.id,
+                            'token': jwtUtils.generateTokenForUser(userFound)
+                        });
+                    } else {
+                        return res.status(403).json ({ 'erreur': 'Mot de passe invalide' });
+                    }
+                });
+            } else {
+                return res.status(404).json ({ 'erreur': 'L`utilisateur n`existe pas dans la base de donnée' });
+            }
+        
+        })
+        .catch(function(err) {
+            return res.status(500).json({ 'erreur': 'vous ne pouvez pas ajouter d`utlisateur' });
+        });
+
 
     }
 }
