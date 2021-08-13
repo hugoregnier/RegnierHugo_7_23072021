@@ -1,0 +1,44 @@
+
+
+
+body {
+    background-color: #111;
+  }
+
+
+
+
+
+  
+  #earth {
+    width: 300px;
+    height: 300px;
+    background: url(https://www.seekpng.com/png/detail/29-291939_news-world-map-plain-blue.png);
+    border-radius: 50%;
+    background-size: 610px;
+    box-shadow: inset 8px 36px 80px 6px rgb(252, 252, 252), inset -6px 0 12px 4px rgb(0, 0, 0);
+    animation-name: rotate;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-name: rotate;
+       -webkit-animation-duration: 6s;
+       -webkit-animation-iteration-count: infinite;
+       -webkit-animation-timing-function: linear;
+  }
+  @keyframes rotate {
+    from {
+      background-position: 0px 0px;
+    }
+    to {
+      background-position: 610px 0px;
+    }
+  }
+  @-webkit-keyframes rotate {
+    from {
+      background-position: 0px 0px;
+    }
+    to {
+      background-position: 610px 0px;
+    }
+  }
