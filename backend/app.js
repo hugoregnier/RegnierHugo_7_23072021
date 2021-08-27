@@ -3,6 +3,7 @@ const app = express();
 
 
 const userRoutes = require('./routes/user.js')
+const messagesRoutes = require('./routes/messages.js')
 
 const bodyParser = require('body-parser');
 
@@ -46,6 +47,6 @@ app.use(bodyParser.json());
 // });
 
 
-app.use('/api', userRoutes);
+app.use('/api', userRoutes, messagesRoutes);
 
 module.exports = app;

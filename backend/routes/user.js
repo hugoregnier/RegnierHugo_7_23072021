@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const userCtrl = require('../controllers/user.js');
-console.log('coucou');
+console.log('test user');
 
 router.post('/user/register', userCtrl.register);
 router.post('/user/login', userCtrl.login);

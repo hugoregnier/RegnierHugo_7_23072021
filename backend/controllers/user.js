@@ -149,7 +149,7 @@ module.exports = {
                 res.status(404).json({ 'erreur': 'utilisateur introuvable' });
             }
         }).catch(function (err) {
-            res.status(500).json({ 'error': 'cannot fetch user' });
+            res.status(500).json({ 'erreur': 'utilisateur introuvable' });
         });
     },
     updateUserProfile: function (req, res) {

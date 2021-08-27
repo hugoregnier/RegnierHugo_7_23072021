@@ -8,7 +8,7 @@ import { DataService } from '../data.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(public data: DataService) { }
 
   ngOnInit(): void {
   }
