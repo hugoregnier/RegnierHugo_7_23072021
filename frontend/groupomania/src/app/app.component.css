@@ -112,6 +112,27 @@
     width: 1920px;
   }
 
+
+  .example-header-image {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1JADPRMsDRA8gyOoN1aXMeYcLZ73yRNi2Gg&usqp=CAU');
+    background-size: cover;
+  }
+
+  .avatarWrapper {
+    margin-left: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 180px;
+    
+  }
+
+  .avatarWrapper:hover {
+    border-radius: 5%;
+    box-shadow: 0px 0px 18px rgb(236, 14, 14);
+    cursor: pointer;
+  }
+
   /* Responsive Styles */
   @media screen and (max-width: 767px) {
     .card-container > *:not(.circle-link) ,
@@ -120,48 +141,6 @@
     }
   }
 
-
-
-
-
-
-
-
-  body {
-    background-color: #111;
-  }
-  #earth {
-    width: 60px;
-    height: 60px;
-    background: url(https://projet-7.dev-web.fr/assets/logo/logo.png);
-    border-radius: 50%;
-    background-size: 400px;
-    box-shadow: inset 4px 22px 60px 6px rgb(177, 177, 177), inset -6px 0 12px 4px rgb(255, 255, 255);
-    animation-name: rotate;
-    animation-duration: 15s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -webkit-animation-name: rotate;
-       -webkit-animation-duration: 15s;
-       -webkit-animation-iteration-count: infinite;
-       -webkit-animation-timing-function: linear;
-  }
-  @keyframes rotate {
-    from {
-      background-position: 0px 0px;
-    }
-    to {
-      background-position: 400px 0px;
-    }
-  }
-  @-webkit-keyframes rotate {
-    from {
-      background-position: 0px 0px;
-    }
-    to {
-      background-position: 400px 0px;
-    }
-  }
 
   @media screen and (max-width: 575px) {
     svg#rocket-smoke {

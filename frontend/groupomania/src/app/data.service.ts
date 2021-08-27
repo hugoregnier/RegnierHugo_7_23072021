@@ -7,43 +7,33 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class DataService {
 
   server = "http://localhost:3000/api"
-  user
-  userObject = Object()
+  user: any;
+  messages: any;
+  // userObject = Object()
 
   getUser() {
-    this.http.get(this.server+"/getUser").subscribe((response) => {
-      this.user=response
-      for(let i in response){
-        this.userObject[response[i]._id] = response[i]
-      }
-      console.log(this.user)
+    this.http.get(this.server+"/user/me").subscribe((response) => {
+      this.user = response
+      // for(let i in response){
+      //   this.userObject[response[i]._id] = response[i]
+      // }
+      // console.log(this.user)
     })
   }
   
+
+  getMessages() {
+    this.http.get(this.server+"/messages").subscribe((response) => {
+      this.messages = response
+      // for(let i in response){
+      //   this.userObject[response[i]._id] = response[i]
+      // }
+      console.log(this.messages)
+    })
+  }
   constructor(private http: HttpClient) { 
     this.getUser()
+    this.getMessages()
   }
-
-  // server = "http://localhost:3000/api"
-  // user = Object()
-
-  // newUser() {
-  //   this.http.get(this.server+"/user/me").subscribe((response) => {
-  //     this.user = response
-  //     console.log(this.user);
-
-  //   })
-  // }
-  
-
-  // getUser() {
-  //   this.http.get(this.server+"/user/me").subscribe((response) => {
-  //     this.user = response
-  //     console.log(this.user);
-      
-  //   })
-  // }
-
-
   
 }
