@@ -1,26 +1,26 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <button mat-button >
+  <button mat-button>
     <p routerLink="home">Accueil</p>
   </button>
 
   <div class="avatarWrapper" *ngIf="data.username">
-  <div mat-card-avatar class="example-header-image"></div>
-  <p>Bienvenue {{data.username}}</p>
-</div>
+    <div mat-card-avatar class="example-header-image"></div>
+    <p>Bienvenue {{data.username}}</p>
+  </div>
   
   <div class="spacer"></div>
+  <img class="groupomaniaImg" src="./assets/group.png" />
   
-    <!-- Se connecter -->
-  
+<!-- Se connecter -->
   <button mat-button>
     <p routerLink="login">Se Connecter</p>
   </button>
   <!-- S'enregistrer -->
-  <button mat-button >
+  <button mat-button>
     <p routerLink="register">S'inscrire</p>
   </button>
-  
+
 
   <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
     <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
@@ -61,5 +61,3 @@
 <footer>
 
 </footer>
-
-

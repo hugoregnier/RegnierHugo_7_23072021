@@ -79,9 +79,7 @@ export class DataService {
     })
   }
   constructor(private http: HttpClient) { 
-    // this.getUser()
     this.getMessages()
-    // this.getUser()
   }
   
 }

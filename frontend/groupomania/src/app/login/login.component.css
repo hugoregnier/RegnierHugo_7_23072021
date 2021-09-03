@@ -1,6 +1,13 @@
-
+mat-card {
+  display: flex;
+    margin: 82px auto;
+    /* padding: 0 16px; */
+    max-width: 300px;
+    flex-direction: column;
+    align-items: center;
+}
   .mat-form-field {
-    width: 100%;
+    /* width: 100%; */
     min-width: 300px;
   }
 
@@ -21,6 +28,8 @@
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .buttonWrapper {
@@ -34,5 +43,9 @@
   
   .imgLog {
     width: 150px;
-    margin-left: 65px;
+    margin-left: -10px;
+  }
+  .connectInRegister:hover {
+    cursor: pointer;
+    color: red;
   }

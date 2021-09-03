@@ -27,6 +27,8 @@
                     <button type="submit" mat-raised-button color="primary" (click)="connexion()">Connexion</button>
                 </div>
                 <p *ngIf="error">{{error.error.erreur}}</p>
+                <hr>
+      <p>Pas encore inscrit ? <b class="connectInRegister" routerLink="/register">inscrivez-vous</b></p>
             <!-- </div> -->
         </form>
     </mat-card-content>

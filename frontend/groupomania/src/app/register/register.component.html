@@ -43,7 +43,7 @@
           <td>
             <mat-form-field class="example-full-width">
               <mat-label>bio</mat-label>
-              <input matInput [(ngModel)]="bio" [ngModelOptions]="{standalone: true}">
+              <textarea matInput [(ngModel)]="bio" [ngModelOptions]="{standalone: true}"></textarea>
             </mat-form-field>
           </td>
         </tr>
@@ -53,7 +53,7 @@
         <button type="submit" mat-raised-button color="primary" (click)="register()">Inscription</button>
       </div>
       <hr>
-      <p>Déjà inscrit ? <b routerLink="login">connectez-vous</b></p>
+      <p>Déjà inscrit ? <b class="connectInRegister" routerLink="/login">connectez-vous</b></p>
     </form>
 
   </mat-card-content>
