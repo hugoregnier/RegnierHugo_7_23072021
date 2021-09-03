@@ -67,7 +67,20 @@ export class DataService {
     });
   }
 
-  
+  createMessage(title: string, content: string) {
+    // console.log(title, content, this.authToken, this.server)
+    return new Promise((resolve, reject) => {
+      this.http.post(this.server+"/messages/new", {title: title, content: content},{ headers: { 'Authorization': this.authToken }}).subscribe(
+        (response:any) => {
+          this.getMessages()
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
 
   getMessages() {
     this.http.get(this.server+"/messages").subscribe((response) => {

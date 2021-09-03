@@ -9,7 +9,27 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
- 
+  title:string = ""
+  content:string = ""
+  error:any
+  message:string = ""
+
+
+  createPost() {
+    // console.log(this.title, this.content)
+    this.data.createMessage(this.title, this.content)
+    .then(res=>{
+      if(res===true){
+        this.message = "message poster !"
+        this.title = ""
+        this.content = ""
+      }
+    })
+    .catch(err=>{
+      this.error = err
+      console.log(this.error)
+    })
+  }
 
   constructor(
     public data: DataService
