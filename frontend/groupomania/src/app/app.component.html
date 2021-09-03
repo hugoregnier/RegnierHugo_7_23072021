@@ -4,9 +4,9 @@
     <p routerLink="home">Accueil</p>
   </button>
 
-  <div class="avatarWrapper">
+  <div class="avatarWrapper" *ngIf="data.username">
   <div mat-card-avatar class="example-header-image"></div>
-  <p>Jean-pierre Da silva</p>
+  <p>Bienvenue {{data.username}}</p>
 </div>
   
   <div class="spacer"></div>

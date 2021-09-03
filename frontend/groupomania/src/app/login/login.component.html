@@ -6,13 +6,13 @@
         <form>
             <p>
                 <mat-form-field>
-                    <input type="text" matInput placeholder="Email" >
+                    <input type="text" [(ngModel)]="login" matInput placeholder="Email" [ngModelOptions]="{standalone: true}" >
                 </mat-form-field>
             </p>
 
             <p>
                 <mat-form-field>
-                    <input type="password" matInput placeholder="Mot de passe">
+                    <input type="password" [(ngModel)]="pass" matInput placeholder="Mot de passe" [ngModelOptions]="{standalone: true}">
                 </mat-form-field>
             </p>
 
@@ -24,8 +24,9 @@
                     <button mat-button color="warn">S'enregistrer</button>
                 </div> -->
                 <div class="button">
-                    <button type="submit" mat-raised-button color="primary">Connexion</button>
+                    <button type="submit" mat-raised-button color="primary" (click)="connexion()">Connexion</button>
                 </div>
+                <p *ngIf="error">{{error.error.erreur}}</p>
             <!-- </div> -->
         </form>
     </mat-card-content>

@@ -10,7 +10,7 @@
           <td>
             <mat-form-field class="example-full-width">
               <mat-label>Email</mat-label>
-              <input matInput>
+              <input matInput [(ngModel)]="email"  [ngModelOptions]="{standalone: true}">
             </mat-form-field>
           </td>
         </tr>
@@ -21,7 +21,7 @@
           <td>
             <mat-form-field class="example-full-width">
               <mat-label>Pseudo</mat-label>
-              <input matInput>
+              <input matInput [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
             </mat-form-field>
           </td>
         </tr>
@@ -32,14 +32,25 @@
           <td>
             <mat-form-field class="example-full-width">
               <mat-label>Mot de passe</mat-label>
-              <input matInput>
+              <input matInput [(ngModel)]="pass" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <table class="example-full-width">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>bio</mat-label>
+              <input matInput [(ngModel)]="bio" [ngModelOptions]="{standalone: true}">
             </mat-form-field>
           </td>
         </tr>
       </table>
 
       <div class="button">
-        <button type="submit" mat-raised-button color="primary">Inscription</button>
+        <button type="submit" mat-raised-button color="primary" (click)="register()">Inscription</button>
       </div>
       <hr>
       <p>Déjà inscrit ? <b routerLink="login">connectez-vous</b></p>

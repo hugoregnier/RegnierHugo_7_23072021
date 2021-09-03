@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,14 @@ export class HomeComponent implements OnInit {
 
  
 
-  constructor(public data: DataService) { }
+  constructor(
+    public data: DataService
+    ,private router: Router
+  ) {
+    if(!this.data.authToken){
+      this.router.navigate(['/login']);
+    }
+  }
 
   ngOnInit(): void {
   }
