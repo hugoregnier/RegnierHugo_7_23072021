@@ -27,13 +27,15 @@ import { HomeComponent } from './home/home.component';
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { MyaccountComponent } from './myaccount/myaccount.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    MyaccountComponent
   ],
   imports: [
     BrowserModule,

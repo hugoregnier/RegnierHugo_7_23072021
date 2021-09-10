@@ -14,24 +14,60 @@ export class DataService {
   isAuth$ = new BehaviorSubject<boolean>(false);
   username : any;
   // bcrypt: any;
+  profil = Object();
+
+
 
   secureget(route:string, callback:any){
     this.http.get(route, { headers: { 'Authorization': this.authToken }}).subscribe(callback)
   }
 
-  getUser() {
+  getUsername() {
     this.secureget(this.server+"/user/me", (response:any) => {
       this.username = response.username;
       console.log(this.username)
     })
-    // this.http.get(this.server+"/user/me", { headers: { 'Authorization': this.authToken }}).subscribe(
-    //   (response:any) => {
-    //   this.username = response.username;
-      
-      
-    //   console.log(this.username)
-    // })
   }
+
+  readUser() {
+    this.secureget(this.server+"/user/me", (response:any) => {
+      this.profil = response;
+
+      console.log(this.profil)
+    })
+  }
+
+  modifyUser(email: string, username: string , password: string, bio: string) {
+    return new Promise((resolve, reject) => {
+    this.http.put(this.server+"/user/me", {email, username, password, bio}, { headers: { 'Authorization': this.authToken }}).subscribe(
+      (response:any) => {
+        this.profil.email = response.email
+        this.profil.username = response.username
+        this.profil.password = response.password
+        this.profil.bio = response.bio
+        // this.userId = response.userId;
+        resolve(true);
+      },
+      (error) => {
+        reject(error);
+      }
+      );
+    });
+  }
+
+  // readUser(email: string, username: string , password: string, bio: string) {
+  //   return new Promise((resolve, reject) => {
+  //     this.http.get(this.server+"/user/me", {email: email, username: username, password: password, bio: bio}).subscribe(
+  //       (response:any) => {
+  //         // this.userId = response.userId;
+  //         resolve(true);
+  //       },
+  //       (error) => {
+  //         reject(error);
+  //       }
+  //     );
+  //   });
+  // }
 
   createUser(email: string, username: string , password: string, bio: string) {
     return new Promise((resolve, reject) => {
@@ -57,7 +93,8 @@ export class DataService {
           // this.bcrypt = response.bcrypt;
           this.isAuth$.next(true);
 
-          this.getUser()
+          this.getUsername()
+          this.readUser()
           resolve(true);
         },
         (error) => {
@@ -81,6 +118,8 @@ export class DataService {
       );
     });
   }
+
+  
 
   getMessages() {
     this.http.get(this.server+"/messages").subscribe((response) => {

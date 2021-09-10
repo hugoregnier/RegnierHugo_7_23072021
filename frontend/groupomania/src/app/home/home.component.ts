@@ -9,10 +9,23 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  // toto:string = "kkrkr"
   title:string = ""
   content:string = ""
   error:any
   message:string = ""
+  comment:string = ""
+
+  
+
+  convertDateTime(date: string | number | Date) {
+    function pad(s: string | number) {
+        return (s < 10) ? "0" + s : s;
+    }
+    let d = new Date(date)
+    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/') + ' à ' + [pad(d.getHours()), pad(d.getMinutes() + 1)].join(':')
+}
+
 
 
   createPost() {
@@ -30,6 +43,20 @@ export class HomeComponent implements OnInit {
       console.log(this.error)
     })
   }
+
+  // createComment() {
+  //   // console.log(this.title, this.content)
+  //   this.data.createComment(this.comment)
+  //   .then(res=>{
+  //     if(res===true){
+  //       this.comment = ""
+  //     }
+  //   })
+  //   .catch(err=>{
+  //     this.error = err
+  //     console.log(this.error)
+  //   })
+  // }
 
   constructor(
     public data: DataService

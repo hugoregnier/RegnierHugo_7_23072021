@@ -1,0 +1,60 @@
+<mat-card>
+    <img class="imgLog" src="./assets/icon-left-font.png" />
+    <mat-card-title>Modifier mes informations</mat-card-title>
+    <mat-card-content>
+      <!-- <form [formGroup]="form" (ngSubmit)="submit()"> -->
+      <form class="example-form">
+  
+        <table class="example-full-width">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput [(ngModel)]="email"  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+  
+        <table class="example-full-width">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Pseudo</mat-label>
+                <input matInput [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+  
+        <!-- <table class="example-full-width">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput [(ngModel)]="password" type="password" [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table> -->
+  
+        <table class="example-full-width">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>bio</mat-label>
+                <textarea matInput [(ngModel)]="bio" [ngModelOptions]="{standalone: true}"></textarea>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+  
+        <div class="button">
+          <button type="submit" mat-raised-button color="secondary" (click)="modify()">Modifier</button>
+        </div>
+        <hr>
+        <p>Déjà inscrit ? <b class="connectInRegister" routerLink="/login">connectez-vous</b></p>
+      </form>
+  
+    </mat-card-content>
+  </mat-card>

@@ -158,12 +158,15 @@ module.exports = {
         var userId = jwtUtils.getUserId(headerAuth);
 
         // Params
-        var bio = req.body.bio;
+        let bio = req.body.bio;
+        let username = req.body.username;
+        let email = req.body.email;
+        let password = req.body.password;
 
         asyncLib.waterfall([
             function (done) {
                 models.User.findOne({
-                    attributes: ['id', 'bio'],
+                    attributes: ['id'],
                     where: { id: userId }
                 }).then(function (userFound) {
                     done(null, userFound);
@@ -175,6 +178,9 @@ module.exports = {
             function (userFound, done) {
                 if (userFound) {
                     userFound.update({
+                        email: (email ? email : userFound.email),
+                        username: (username ? username : userFound.username),
+                        password: (password ? password : userFound.password),
                         bio: (bio ? bio : userFound.bio)
                     }).then(function () {
                         done(userFound);
