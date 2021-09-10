@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MyaccountComponent } from './myaccount/myaccount.component';
+import { TopicMessagesComponent } from './topic-messages/topic-messages.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MyaccountComponent } from './myaccount/myaccount.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    MyaccountComponent
+    MyaccountComponent,
+    TopicMessagesComponent
   ],
   imports: [
     BrowserModule,

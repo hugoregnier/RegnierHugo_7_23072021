@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   title:string = ""
   content:string = ""
   error:any
-  message:string = ""
+  topic:string = ""
   comment:string = ""
 
   
@@ -30,10 +30,10 @@ export class HomeComponent implements OnInit {
 
   createPost() {
     // console.log(this.title, this.content)
-    this.data.createMessage(this.title, this.content)
+    this.data.createTopic(this.title, this.content)
     .then(res=>{
       if(res===true){
-        this.message = "message poster !"
+        this.topic = "message poster !"
         this.title = ""
         this.content = ""
       }
@@ -44,19 +44,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  // createComment() {
-  //   // console.log(this.title, this.content)
-  //   this.data.createComment(this.comment)
-  //   .then(res=>{
-  //     if(res===true){
-  //       this.comment = ""
-  //     }
-  //   })
-  //   .catch(err=>{
-  //     this.error = err
-  //     console.log(this.error)
-  //   })
-  // }
 
   constructor(
     public data: DataService

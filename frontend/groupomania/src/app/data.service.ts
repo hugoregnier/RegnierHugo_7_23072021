@@ -10,6 +10,7 @@ export class DataService {
   server = "http://localhost:3000/api"
   userId: any;
   messages: any;
+  topics: any;
   authToken: any;
   isAuth$ = new BehaviorSubject<boolean>(false);
   username : any;
@@ -130,6 +131,39 @@ export class DataService {
       console.log(this.messages)
     })
   }
+
+
+  createTopic(title: string, content: string) {
+    // console.log(title, content, this.authToken, this.server)
+    return new Promise((resolve, reject) => {
+      this.http.post(this.server+"/topics/new", {title: title, content: content},{ headers: { 'Authorization': this.authToken }}).subscribe(
+        (response:any) => {
+          this.getTopics()
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getTopics() {
+    this.http.get(this.server+"/topics").subscribe((response) => {
+      this.topics = response
+      // for(let i in response){
+      //   this.userObject[response[i]._id] = response[i]
+      // }
+      console.log(this.topics)
+    })
+  }
+
+
+
+
+
+
+
   constructor(private http: HttpClient) { 
     this.getMessages()
   }

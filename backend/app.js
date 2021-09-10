@@ -4,6 +4,7 @@ const app = express();
 
 const userRoutes = require('./routes/user.js')
 const messagesRoutes = require('./routes/messages.js')
+const topicsRoutes = require('./routes/topics.js')
 
 const bodyParser = require('body-parser');
 
@@ -27,26 +28,7 @@ app.use(bodyParser.json());
 });
 
 
-// app.use((req, res, next) => {
-//   console.log('Requête reçue !');
-//   next();
-// });
 
-// app.use((req, res, next) => {
-//   res.status(201);
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   res.json({ message: 'Votre requête a bien été reçue !' });
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   console.log('Réponse envoyée avec succès !');
-// });
-
-
-app.use('/api', userRoutes, messagesRoutes);
+app.use('/api', userRoutes, messagesRoutes, topicsRoutes);
 
 module.exports = app;
