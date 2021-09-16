@@ -166,6 +166,7 @@ export class DataService {
 
   constructor(private http: HttpClient) { 
     this.getMessages()
+    this.getTopics()
   }
   
 }

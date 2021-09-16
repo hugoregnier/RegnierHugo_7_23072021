@@ -41,7 +41,19 @@ module.exports = {
               return res.status(500).json({ 'erreur': 'impossible de vérifier l`utilisateur' });
             });
           },
-          function(userFound, done) {
+          // function(topic) {
+          //   // on va chercher l'utilisateur
+          //   models.Topic.findOne({
+          //     where: { id: topicId }
+          //   })
+          //   .then(function(topicFound) {
+          //     done(null, topicFound);
+          //   })
+          //   .catch(function(err) {
+          //     return res.status(500).json({ 'erreur': 'impossible de vérifier le topic' });
+          //   });
+          // },
+          function(userFound, topic, topicFound, done) {
             if(userFound) {
               // si on a l'utilisateur, on créé le message
               models.Message.create({
@@ -49,7 +61,8 @@ module.exports = {
                 content: content,
                 likes  : 0,
                 // relie un message à un identifiant d'utilisateur unique
-                UserId : userFound.id
+                UserId : userFound.id,
+                // topicID: topicID
               })
               .then(function(newMessage) {
                 done(newMessage);

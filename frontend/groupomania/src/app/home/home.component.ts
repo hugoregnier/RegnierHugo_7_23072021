@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  createPost() {
+  createSujet() {
     // console.log(this.title, this.content)
     this.data.createTopic(this.title, this.content)
     .then(res=>{
