@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'myaccount', component: MyaccountComponent },
-  { path: 'topic-messages', component: TopicMessagesComponent },
+  { path: 'topic/:id', component: TopicMessagesComponent },
 
   { path: '**', redirectTo: '' }
 ];
