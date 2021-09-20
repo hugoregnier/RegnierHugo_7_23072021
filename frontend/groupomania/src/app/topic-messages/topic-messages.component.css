@@ -30,14 +30,11 @@ body {
     width: 100%;
   }  
 .postWrapper {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   margin: 82px auto;
   width: 87%;
 }
 .postCard {
-  width: 45%;
+  /* width: 45%; */
 }
 .textWrapper {
   display: flex;

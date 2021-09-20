@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-topic-messages',
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class TopicMessagesComponent implements OnInit {
 
    // toto:string = "kkrkr"
-   title:string = ""
+  //  title:string = ""
    content:string = ""
    error:any
    message:string = ""
@@ -30,11 +30,11 @@ export class TopicMessagesComponent implements OnInit {
  
    createPost() {
      // console.log(this.title, this.content)
-     this.data.createMessage(this.title, this.content)
+     this.data.createMessage(this.content, this.route.snapshot.paramMap.get('id'))
      .then(res=>{
        if(res===true){
          this.message = "message poster !"
-         this.title = ""
+        //  this.title = ""
          this.content = ""
        }
      })
@@ -48,10 +48,12 @@ export class TopicMessagesComponent implements OnInit {
    constructor(
      public data: DataService
      ,private router: Router
+     ,private route: ActivatedRoute
    ) {
      if(!this.data.authToken){
        this.router.navigate(['/login']);
      }
+     this.data.getMessages(this.route.snapshot.paramMap.get('id'))
    }
  
    ngOnInit(): void {

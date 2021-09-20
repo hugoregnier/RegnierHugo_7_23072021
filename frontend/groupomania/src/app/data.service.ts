@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -105,12 +106,12 @@ export class DataService {
     });
   }
 
-  createMessage(title: string, content: string) {
+  createMessage(content: string, topicId:any) {
     // console.log(title, content, this.authToken, this.server)
     return new Promise((resolve, reject) => {
-      this.http.post(this.server+"/messages/new", {title: title, content: content},{ headers: { 'Authorization': this.authToken }}).subscribe(
+      this.http.post(this.server+"/messages/new", {content: content, topicId: topicId},{ headers: { 'Authorization': this.authToken }}).subscribe(
         (response:any) => {
-          this.getMessages()
+          this.getMessages(topicId)
           resolve(true);
         },
         (error) => {
@@ -122,8 +123,8 @@ export class DataService {
 
   
 
-  getMessages() {
-    this.http.get(this.server+"/messages").subscribe((response) => {
+  getMessages(id:any) {
+    this.http.post(this.server+"/messages", {topicId: id}).subscribe((response) => {
       this.messages = response
       // for(let i in response){
       //   this.userObject[response[i]._id] = response[i]
@@ -158,14 +159,19 @@ export class DataService {
     })
   }
 
+  logout() {
+    this.authToken = null;
+    this.userId = null;
+    this.isAuth$.next(false);
+    this.router.navigate(['login']);
+  }
 
 
 
 
 
 
-  constructor(private http: HttpClient) { 
-    this.getMessages()
+  constructor(private http: HttpClient, private router: Router) { 
     this.getTopics()
   }
   

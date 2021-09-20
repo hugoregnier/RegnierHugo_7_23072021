@@ -3,7 +3,7 @@ const asyncLib = require('async');
 const jwtUtils = require('../utils/jwt.utils');
 
 
-const TITLE_LIMIT   = 2;
+// const TITLE_LIMIT   = 2;
 const CONTENT_LIMIT = 4;
 
 const ITEMS_LIMIT   = 50;
@@ -16,17 +16,18 @@ module.exports = {
         var userId      = jwtUtils.getUserId(headerAuth);
     
         // récupérer des paramètres: titre et contenu
-        var title   = req.body.title;
+        // var title   = req.body.title;
         var content = req.body.content;
+        var topicId = req.body.topicId;
 
         // condition si le titre n'est pas vide      
-        if (title == null || content == null) {
-          return res.status(400).json({ 'erreur': 'Il manque des parametres' });
-        }
+        // if (title == null || content == null) {
+        //   return res.status(400).json({ 'erreur': 'Il manque des parametres' });
+        // }
         // condition de limite de caractère
-        if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
-          return res.status(400).json({ 'erreur': 'paramètres invalides' });
-        }
+        // if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
+        //   return res.status(400).json({ 'erreur': 'paramètres invalides' });
+        // }
     
         asyncLib.waterfall([
           function(done) {
@@ -45,12 +46,12 @@ module.exports = {
             if(userFound) {
               // si on a l'utilisateur, on créé le message
               models.Message.create({
-                title  : title,
+                // title  : title,
                 content: content,
                 likes  : 0,
                 // relie un message à un identifiant d'utilisateur unique
                 UserId : userFound.id,
-                topicId: 1
+                topicId: topicId
               })
               .then(function(newMessage) {
                 done(newMessage);
@@ -75,12 +76,17 @@ module.exports = {
       var offset  = parseInt(req.query.offset);
       // classe les messages par un ordre particulier
       var order   = req.query.order;
+      var topicId = req.body.topicId
 
       if (limit > ITEMS_LIMIT) {
         limit = ITEMS_LIMIT;
       }
+      // models.Topic.findOne({
+      //   where: { id: topicId }
+      // })
 
       models.Message.findAll({
+        where: { topicId: topicId },
         order: [(order != null) ? order.split(':') : ['title', 'ASC']],
         attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
         limit: (!isNaN(limit)) ? limit : null,
@@ -88,7 +94,7 @@ module.exports = {
         include: [{
           model: models.User,
           attributes: [ 'username' ]
-        }]
+        }],
       }).then(function(messages) {
         if (messages) {
           res.status(200).json(messages);

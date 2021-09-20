@@ -14,15 +14,15 @@
   
 <!-- Se connecter -->
   <button mat-button>
-    <p routerLink="login">Se Connecter</p>
+    <p routerLink="login" >Se Connecter</p>
   </button>
   <!-- S'enregistrer -->
-  <button mat-button>
+  <button mat-button >
     <p routerLink="register">S'inscrire</p>
   </button>
 
-  <button mat-button>
-    <p routerLink="topic/1">S'ccccc</p>
+  <button mat-button  *ngIf="data.username">
+    <p (click)="onLogout()">Se deconnecter</p>
   </button>
 
 

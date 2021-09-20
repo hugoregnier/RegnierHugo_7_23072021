@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DataService } from './data.service';
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,6 +10,10 @@ import { DataService } from './data.service';
 })
 export class AppComponent {
   title = 'groupomania';
+
+  onLogout() {
+    this.data.logout();
+  }
 
   constructor(public data: DataService) { }
 }
