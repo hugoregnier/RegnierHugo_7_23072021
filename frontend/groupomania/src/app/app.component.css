@@ -59,15 +59,6 @@
     opacity: 0.8;
   }
 
-  .content {
-    /* display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 1600px;
-    flex-direction: column;
-    align-items: center; */
-  }
-
   svg.material-icons {
     height: 24px;
     width: auto;
@@ -152,3 +143,9 @@
       visibility: hidden;
     }
   }
+  @media only screen and (min-width : 320px) and (max-width : 480px) {
+   .imggroup {
+     display: none;
+   }
+}
+ 

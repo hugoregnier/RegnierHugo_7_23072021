@@ -49,3 +49,9 @@ mat-card {
     cursor: pointer;
     color: red;
   }
+  .erreurWrapper {
+    color: red;
+  }
+  .successWrapper {
+    color: green;
+  }

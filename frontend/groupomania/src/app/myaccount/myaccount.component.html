@@ -53,9 +53,8 @@
           <button type="submit" mat-raised-button color="primary" (click)="modify()">Modifier</button>
           <button type="submit" mat-raised-button color="warn" (click)="delete()">Supprimer</button>
         </div>
-        <p *ngIf="error">{{error.error.erreur}}</p>
-          <p color="success" *ngIf="reponseM">{{reponseM}}</p>
-          <p *ngIf="reponseD">{{reponseD}}</p>
+        <p class="erreurWrapper" *ngIf="error">{{error.error.erreur}}</p>
+        <p class="successWrapper" *ngIf="reponseM">{{reponseM}}</p>
         <hr>
         <p>Déjà inscrit ? <b class="connectInRegister" routerLink="/login">connectez-vous</b></p>
       </form>

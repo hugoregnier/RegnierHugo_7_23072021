@@ -163,6 +163,23 @@ module.exports = {
         let email = req.body.email;
         let password = req.body.password;
 
+
+        if (email == null || username == null || password == null) {
+            return res.status(400).json({ 'erreur': 'Il manque des parametres' });
+        }
+
+        if (username.length >= 13 || username.length <= 4) {
+            return res.status(400).json({ 'erreur': 'Le nom d`utilisateur doit être compris entre 5 et 12 caractères' });
+        }
+
+        if (!EMAIL_REGEX.test(email)) {
+            return res.status(400).json({ 'erreur': 'email non valide' });
+        }
+
+        if (!PASSWORD_REGEX.test(password)) {
+            return res.status(400).json({ 'erreur': 'mot de passe invalide, 4 à 8 caractères nécessaire avec 1 chiifre à la fin' });
+        }
+
         asyncLib.waterfall([
             function (done) {
                 models.User.findOne({
