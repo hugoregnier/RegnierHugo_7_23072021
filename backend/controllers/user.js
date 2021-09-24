@@ -177,10 +177,19 @@ module.exports = {
             },
             function (userFound, done) {
                 if (userFound) {
+                    bcrypt.hash(password, 5, function (err, bcryptedPassword) {
+                        done(null, userFound, bcryptedPassword);
+                    });
+                } else {
+                    return res.status(409).json({ 'erreur': 'l`utilisateur existe déjà' });
+                }
+            },
+            function (userFound, bcryptedPassword, done) {
+                if (userFound) {
                     userFound.update({
                         email: (email ? email : userFound.email),
                         username: (username ? username : userFound.username),
-                        password: (password ? password : userFound.password),
+                        password: (bcryptedPassword),
                         bio: (bio ? bio : userFound.bio)
                     }).then(function () {
                         done(userFound);
