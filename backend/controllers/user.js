@@ -207,5 +207,55 @@ module.exports = {
                 return res.status(500).json({ 'erreur': 'l`utilisateur ne peut être modifier' });
             }
         });
+    },
+    deleteUserProfile: function (req, res) {
+        // Getting auth header
+        var headerAuth = req.headers['authorization'];
+        var userId = jwtUtils.getUserId(headerAuth);
+
+        // Params
+        let bio = req.body.bio;
+        let username = req.body.username;
+        let email = req.body.email;
+        let password = req.body.password;
+
+        asyncLib.waterfall([
+            function (done) {
+                models.User.findOne({
+                    attributes: ['id'],
+                    where: { id: userId }
+                }).then(function (userFound) {
+                    done(null, userFound);
+                })
+                    .catch(function (err) {
+                        return res.status(500).json({ 'erreur': 'impossible de vérifier l`utilisateur' });
+                    });
+            },
+            function (userFound, done) {
+                if (userFound) {
+                    bcrypt.hash(password, 5, function (err, bcryptedPassword) {
+                        done(null, userFound, bcryptedPassword);
+                    });
+                } else {
+                    return res.status(409).json({ 'erreur': 'l`utilisateur existe déjà' });
+                }
+            },
+            function (userFound, bcryptedPassword, done) {
+                if (userFound) {
+                    userFound.destroy({
+                        where: [
+                            'userId LIKE ?'
+                            , userFound  
+                        ]
+                    }).then(function () {
+                        return res.status(201).json('utilisateur supprimé');
+                    }).catch(function (err) {
+                        res.status(500).json({ 'erreur': 'l`utilisateur ne peut être supprimé' });
+                    });
+                } else {
+                    res.status(404).json({ 'erreur': 'utilisateur introuvable' });
+                }
+            },
+        ]);
     }
 }

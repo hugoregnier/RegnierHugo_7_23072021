@@ -57,6 +57,24 @@ export class DataService {
     });
   }
 
+  deleteUser(email: string, username: string , password: string, bio: string) {
+    return new Promise((resolve, reject) => {
+    this.http.put(this.server+"/user/sup", {email, username, password, bio}, { headers: { 'Authorization': this.authToken }}).subscribe(
+      (response:any) => {
+        this.profil.email = response.email
+        this.profil.username = response.username
+        this.profil.password = response.password
+        this.profil.bio = response.bio
+        // this.userId = response.userId;
+        resolve(true);
+      },
+      (error) => {
+        reject(error);
+      }
+      );
+    });
+  }
+
   // readUser(email: string, username: string , password: string, bio: string) {
   //   return new Promise((resolve, reject) => {
   //     this.http.get(this.server+"/user/me", {email: email, username: username, password: password, bio: bio}).subscribe(

@@ -13,6 +13,8 @@ export class MyaccountComponent implements OnInit {
   password = this.data.profil.password
   bio = this.data.profil.bio
   error: any
+  reponseM: any
+  reponseD: any
 
   // this.data.profil.email
 
@@ -31,12 +33,8 @@ export class MyaccountComponent implements OnInit {
     this.data.modifyUser(this.email, this.username, this.password, this.bio)
     .then(res=>{
       if(res===true){
-        // this.email = ""
-        // this.username = ""
-        // this.password = ""
-        // this.bio = ""
+        this.reponseM = "modification réussie"
         console.log("modification réussie");
-        
       }
     })
     .catch(err=>{
@@ -45,17 +43,23 @@ export class MyaccountComponent implements OnInit {
     })
   }
 
-  // getUser() {
-  //   for (let item of this.data.profil) {
-  //     this.email = this.data.profil.email
-  //   }
-    
-  // }
-
-  // getUser() {
-  //   this.data.readUser(this.email, this.username, this.pass, this.bio)
-
-  // }
+  delete() {
+    // console.log(this.title, this.content)
+    this.data.deleteUser(this.email, this.username, this.password, this.bio)
+    .then(res=>{
+      if(res===true){
+        this.reponseD = "suppression réussie"
+        this.data.logout();
+        this.router.navigate(['/login']);
+        console.log("suppression réussie");
+        
+      }
+    })
+    .catch(err=>{
+      this.error = err
+      console.log(this.error)
+    })
+  }
 
 
   ngOnInit(): void {

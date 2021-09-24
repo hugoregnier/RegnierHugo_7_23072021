@@ -15,5 +15,8 @@ export class AppComponent {
     this.data.logout();
   }
 
-  constructor(public data: DataService) { }
+
+  constructor(public data: DataService) {
+
+  }
 }

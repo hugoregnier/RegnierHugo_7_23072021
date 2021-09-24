@@ -9,5 +9,7 @@ router.post('/user/login', userCtrl.login);
 
 router.get('/user/me', userCtrl.getUserProfile);
 router.put('/user/me', userCtrl.updateUserProfile);
+router.put('/user/sup', userCtrl.deleteUserProfile);
+
 
 module.exports = router;
