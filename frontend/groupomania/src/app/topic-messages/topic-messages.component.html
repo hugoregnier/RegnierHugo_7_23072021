@@ -1,12 +1,12 @@
 <div class="postWrapper">
   <mat-card class="example-card-topic">
     <mat-card-header>
-     
+
       <mat-card-title><i>Sujet créé par {{currentTopic.username}}</i></mat-card-title>
-      
+
       <mat-card-subtitle>{{convertDateTime(currentTopic.createdAt)}}</mat-card-subtitle>
     </mat-card-header>
-  
+
     <mat-card-content>
       <mat-card-title>{{currentTopic.title}}</mat-card-title>
       <p>
@@ -14,6 +14,10 @@
       </p>
     </mat-card-content>
   </mat-card>
+  <div class="titleWrapper">
+    <h1>Liste de messages lié au sujet</h1>
+    <hr>
+  </div>
   <!-- // récupération de la liste des messages  -->
   <mat-card class="example-card" *ngFor="let message of data.messages">
     <mat-card-header>
@@ -31,23 +35,17 @@
 
       </i>
     </mat-card-content>
+    <mat-card-actions *ngIf="data.isAdmin">
+      <button color="warn" mat-button (click)="deletePost(message.id)">Supprimer ce message non conforme</button>
+    </mat-card-actions>
   </mat-card>
 
   <!-- // poster un message  -->
   <mat-card class="example-card">
     <mat-card-header class="titleWrapper">
       <mat-card-title>Poster votre message</mat-card-title>
-      <!-- <mat-card-subtitle>
-
-        <input matInput #message maxlength="40" placeholder="Titre de votre message" [(ngModel)]="title" mat-input
-          [ngModelOptions]="{standalone: true}">
-        <mat-hint align="start"><i> 40 caractères maximum </i></mat-hint>
-        <mat-hint align="end">{{message.value.length}} / 40</mat-hint>
-
-      </mat-card-subtitle> -->
     </mat-card-header>
     <mat-card-content>
-
       <textarea matInput placeholder="Votre message..." [(ngModel)]="content"
         [ngModelOptions]="{standalone: true}"></textarea>
     </mat-card-content>

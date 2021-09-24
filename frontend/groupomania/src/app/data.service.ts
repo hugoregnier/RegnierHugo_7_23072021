@@ -17,6 +17,7 @@ export class DataService {
   username : any;
   // bcrypt: any;
   profil = Object();
+  isAdmin : any
 
 
 
@@ -110,6 +111,7 @@ export class DataService {
         (response:any) => {
           this.userId = response.userId;
           this.authToken = response.token;
+          this.isAdmin = response.isAdmin;
           // this.bcrypt = response.bcrypt;
           this.isAuth$.next(true);
 
@@ -130,6 +132,20 @@ export class DataService {
       this.http.post(this.server+"/messages/new", {content: content, topicId: topicId},{ headers: { 'Authorization': this.authToken }}).subscribe(
         (response:any) => {
           this.getMessages(topicId)
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  deleteMessage(messageId:any) {
+    // console.log(title, content, this.authToken, this.server)
+    return new Promise((resolve, reject) => {
+      this.http.put(this.server+"/messages/sup", {messageId: messageId},{ headers: { 'Authorization': this.authToken }}).subscribe(
+        (response:any) => {
           resolve(true);
         },
         (error) => {

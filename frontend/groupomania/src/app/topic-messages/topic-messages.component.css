@@ -25,6 +25,10 @@ body {
     max-width: 500px;
     width: 100%;
   }
+  .titleWrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
 
  mat-hint {
    font-size: small;

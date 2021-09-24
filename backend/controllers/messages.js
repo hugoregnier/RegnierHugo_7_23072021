@@ -105,5 +105,21 @@ module.exports = {
         console.log(err);
         res.status(500).json({ "erreur": "champs non valide" });
       });
+    },
+    deleteMessage: function (req, res) {
+
+      var messageId = req.body.messageId
+
+
+        models.Message.destroy({
+          where: {
+            id: messageId
+          }
+      }).then(function () {
+          return res.status(201).json('message supprimé');
+      }).catch(function (err) {
+          res.status(500).json({ 'erreur': 'le message ne peut être supprimé' });
+      });
+      
     }
 }

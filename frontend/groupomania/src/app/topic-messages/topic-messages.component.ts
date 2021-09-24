@@ -16,6 +16,7 @@ export class TopicMessagesComponent implements OnInit {
    message:string = ""
    comment:string = ""
    currentTopic:any
+   
  
    
  
@@ -44,6 +45,20 @@ export class TopicMessagesComponent implements OnInit {
        console.log(this.error)
      })
    }
+
+   deletePost(id:any) {
+    // console.log(this.title, this.content)
+    this.data.deleteMessage(id)
+    .then(res=>{
+      if(res===true){
+        
+      }
+    })
+    .catch(err=>{
+      this.error = err
+      console.log(this.error)
+    })
+  }
  
  
    constructor(
