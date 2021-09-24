@@ -15,6 +15,7 @@ export class TopicMessagesComponent implements OnInit {
    error:any
    message:string = ""
    comment:string = ""
+   currentTopic:any
  
    
  
@@ -54,6 +55,13 @@ export class TopicMessagesComponent implements OnInit {
        this.router.navigate(['/login']);
      }
      this.data.getMessages(this.route.snapshot.paramMap.get('id'))
+     for(let topic of this.data.topics){
+       if(topic.id == this.route.snapshot.paramMap.get('id')){
+        this.currentTopic = topic
+       }
+     }
+     console.log(this.currentTopic);
+     
    }
  
    ngOnInit(): void {

@@ -10,7 +10,11 @@ body {
     max-width: 80%;
     margin: 20px auto;
   }
-  
+  .example-card-topic {
+    border: solid 1px red;
+    max-width: 80%;
+    margin: 20px auto;
+  }
   .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
@@ -33,9 +37,7 @@ body {
   margin: 82px auto;
   width: 87%;
 }
-.postCard {
-  /* width: 45%; */
-}
+
 .textWrapper {
   display: flex;
   flex-direction: column;
