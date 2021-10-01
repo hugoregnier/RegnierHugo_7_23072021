@@ -51,7 +51,12 @@ export class TopicMessagesComponent implements OnInit {
     this.data.deleteMessage(id)
     .then(res=>{
       if(res===true){
-        
+        this.data.getMessages(this.route.snapshot.paramMap.get('id'))
+     for(let topic of this.data.topics){
+       if(topic.id == this.route.snapshot.paramMap.get('id')){
+        this.currentTopic = topic
+       }
+     }
       }
     })
     .catch(err=>{
