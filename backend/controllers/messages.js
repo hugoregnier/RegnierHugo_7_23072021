@@ -16,18 +16,17 @@ module.exports = {
         var userId      = jwtUtils.getUserId(headerAuth);
     
         // récupérer des paramètres: titre et contenu
-        // var title   = req.body.title;
         var content = req.body.content;
         var topicId = req.body.topicId;
 
-        // condition si le titre n'est pas vide      
-        // if (title == null || content == null) {
-        //   return res.status(400).json({ 'erreur': 'Il manque des parametres' });
-        // }
+        // condition si le contenu n'est pas vide      
+        if ( content == null) {
+          return res.status(400).json({ 'erreur': 'Il manque des parametres' });
+        }
         // condition de limite de caractère
-        // if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
-        //   return res.status(400).json({ 'erreur': 'paramètres invalides' });
-        // }
+        if ( content.length <= CONTENT_LIMIT) {
+          return res.status(400).json({ 'erreur': 'paramètres invalides' });
+        }
     
         asyncLib.waterfall([
           function(done) {
@@ -81,9 +80,6 @@ module.exports = {
       if (limit > ITEMS_LIMIT) {
         limit = ITEMS_LIMIT;
       }
-      // models.Topic.findOne({
-      //   where: { id: topicId }
-      // })
 
       models.Message.findAll({
         where: { topicId: topicId },
