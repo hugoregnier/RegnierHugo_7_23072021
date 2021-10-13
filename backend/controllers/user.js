@@ -32,7 +32,7 @@ module.exports = {
         }
 
         if (!PASSWORD_REGEX.test(password)) {
-            return res.status(400).json({ 'erreur': 'mot de passe invalide, 4 à 8 caractères nécessaire avec 1 chiifre à la fin' });
+            return res.status(400).json({ 'erreur': 'mot de passe invalide, 4 à 8 caractères nécessaire avec 1 chiffre à la fin' });
         }
 
         asyncLib.waterfall([
