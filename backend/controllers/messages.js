@@ -11,9 +11,9 @@ const ITEMS_LIMIT   = 50;
 
 module.exports = {
     createMessage: function(req, res) {
-        // identifier l'utilisateur
-        var headerAuth  = req.headers['authorization'];
-        var userId      = jwtUtils.getUserId(headerAuth);
+         // identifier l'utilisateur
+         var headerAuth  = req.headers['authorization'];
+         var userId      = jwtUtils.getUserId(headerAuth);
     
         // récupérer des paramètres: titre et contenu
         var content = req.body.content;
@@ -68,6 +68,7 @@ module.exports = {
         });
       },
     listMessage: function (req, res) {
+
       // selectionne les colonnes que l'on souhaite afficher
       var fields  = req.query.fields;
       // récupère les messages par segmentation

@@ -137,8 +137,6 @@ module.exports = {
         var headerAuth = req.headers['authorization'];
         var userId = jwtUtils.getUserId(headerAuth);
 
-        if (userId < 0)
-            return res.status(400).json({ 'erreur': 'token invalide' });
 
         models.User.findOne({
             attributes: ['id', 'email', 'username', 'bio'],
@@ -231,6 +229,7 @@ module.exports = {
         var headerAuth = req.headers['authorization'];
         var userId = jwtUtils.getUserId(headerAuth);
 
+
         // Params
         let bio = req.body.bio;
         let username = req.body.username;
@@ -248,15 +247,6 @@ module.exports = {
                     .catch(function (err) {
                         return res.status(500).json({ 'erreur': 'impossible de vérifier l`utilisateur' });
                     });
-            },
-            function (userFound, done) {
-                if (userFound) {
-                    bcrypt.hash(password, 5, function (err, bcryptedPassword) {
-                        done(null, userFound, bcryptedPassword);
-                    });
-                } else {
-                    return res.status(409).json({ 'erreur': 'l`utilisateur existe déjà' });
-                }
             },
             function (userFound, bcryptedPassword, done) {
                 if (userFound) {

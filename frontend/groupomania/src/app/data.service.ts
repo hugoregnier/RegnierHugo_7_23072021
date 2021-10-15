@@ -24,6 +24,9 @@ export class DataService {
   secureget(route:string, callback:any){
     this.http.get(route, { headers: { 'Authorization': this.authToken }}).subscribe(callback)
   }
+  securepost(route:string, data:any, callback:any){
+    this.http.post(route, data,{ headers: { 'Authorization': this.authToken }}).subscribe(callback)
+  }
 
   getUsername() {
     this.secureget(this.server+"/user/me", (response:any) => {
@@ -76,25 +79,11 @@ export class DataService {
     });
   }
 
-  // readUser(email: string, username: string , password: string, bio: string) {
-  //   return new Promise((resolve, reject) => {
-  //     this.http.get(this.server+"/user/me", {email: email, username: username, password: password, bio: bio}).subscribe(
-  //       (response:any) => {
-  //         // this.userId = response.userId;
-  //         resolve(true);
-  //       },
-  //       (error) => {
-  //         reject(error);
-  //       }
-  //     );
-  //   });
-  // }
 
   createUser(email: string, username: string , password: string, bio: string) {
     return new Promise((resolve, reject) => {
       this.http.post(this.server+"/user/register", {email: email, username: username, password: password, bio: bio}).subscribe(
         (response:any) => {
-          // this.userId = response.userId;
           resolve(true);
         },
         (error) => {
@@ -112,8 +101,11 @@ export class DataService {
           this.userId = response.userId;
           this.authToken = response.token;
           this.isAdmin = response.isAdmin;
-          // this.bcrypt = response.bcrypt;
           this.isAuth$.next(true);
+
+          localStorage.setItem("authToken", this.authToken);
+          localStorage.setItem("userId", this.userId);
+          localStorage.setItem("isAdmin", this.isAdmin);
 
           this.getUsername()
           this.readUser()
@@ -158,7 +150,7 @@ export class DataService {
   
 
   getMessages(id:any) {
-    this.http.post(this.server+"/messages", {topicId: id}).subscribe((response) => {
+    this.securepost(this.server+"/messages", {topicId: id},(response:any) => {
       this.messages = response
       // for(let i in response){
       //   this.userObject[response[i]._id] = response[i]
@@ -184,7 +176,7 @@ export class DataService {
   }
 
   getTopics() {
-    this.http.get(this.server+"/topics").subscribe((response) => {
+    this.secureget(this.server+"/topics",(response:any) => {
       this.topics = response
       // for(let i in response){
       //   this.userObject[response[i]._id] = response[i]
@@ -197,6 +189,7 @@ export class DataService {
     this.authToken = null;
     this.userId = null;
     this.isAuth$.next(false);
+    localStorage.clear();
     this.router.navigate(['login']);
   }
 
@@ -206,7 +199,14 @@ export class DataService {
 
 
   constructor(private http: HttpClient, private router: Router) { 
-    this.getTopics()
+    if(localStorage.getItem("authToken")){
+      this.authToken = localStorage.getItem("authToken");
+      this.userId = localStorage.getItem("userId");
+      this.isAdmin = localStorage.getItem("isAdmin");
+      this.isAuth$.next(true);
+      this.getUsername()
+      this.readUser()
+    }
   }
   
 }

@@ -11,9 +11,10 @@ const ITEMS_LIMIT   = 50;
 
 module.exports = {
     createTopic: function(req, res) {
-        // identifier l'utilisateur
-        var headerAuth  = req.headers['authorization'];
-        var userId      = jwtUtils.getUserId(headerAuth);
+       // identifier l'utilisateur
+       var headerAuth  = req.headers['authorization'];
+       var userId      = jwtUtils.getUserId(headerAuth);
+       
     
         // récupérer des paramètres: titre et contenu
         var title   = req.body.title;
@@ -67,6 +68,11 @@ module.exports = {
         });
       },
     listTopic: function (req, res) {
+        // identifier l'utilisateur
+        var headerAuth  = req.headers['authorization'];
+        var userId      = jwtUtils.getUserId(headerAuth);
+        
+
       // selectionne les colonnes que l'on souhaite afficher
       var fields  = req.query.fields;
       // récupère les Topics par segmentation

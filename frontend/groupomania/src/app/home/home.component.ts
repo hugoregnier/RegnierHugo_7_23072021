@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
     public data: DataService
     ,private router: Router
   ) {
+    this.data.getTopics()
     if(!this.data.authToken){
       this.router.navigate(['/login']);
     }

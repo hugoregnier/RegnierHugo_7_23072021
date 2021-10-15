@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(
     public data: DataService
     ,private router: Router
-  ) { }
+  ) { 
+    localStorage.clear()
+  }
 
   connexion(){
     console.log(this.login, this.pass)
