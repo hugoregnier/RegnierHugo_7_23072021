@@ -248,7 +248,7 @@ module.exports = {
                         return res.status(500).json({ 'erreur': 'impossible de vérifier l`utilisateur' });
                     });
             },
-            function (userFound, bcryptedPassword, done) {
+            function (userFound, done) {
                 if (userFound) {
                     userFound.destroy({
                         where: [

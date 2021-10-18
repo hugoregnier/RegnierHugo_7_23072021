@@ -12,9 +12,6 @@
     <mat-card-header class="titleWrapper">
       <mat-card-title>Poster votre sujet</mat-card-title>
       <mat-card-subtitle>
-        <!-- <form class="example-form">
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Titre</mat-label> -->
         <input matInput #message maxlength="40" placeholder="Titre de votre message" [(ngModel)]="title" mat-input
           [ngModelOptions]="{standalone: true}">
         <mat-hint align="start"><i> 40 caractères maximum </i></mat-hint>

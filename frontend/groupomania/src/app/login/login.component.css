@@ -17,6 +17,12 @@ mat-card {
     justify-content: center;
   }
 
+  .invalid-feedback {
+    display: block;
+    width: 100%;
+    color: red;
+  }
+
   .erreurWrapper {
     color: red;
   }

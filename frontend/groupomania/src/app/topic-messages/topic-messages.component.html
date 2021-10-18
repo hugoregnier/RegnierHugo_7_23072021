@@ -27,13 +27,9 @@
     </mat-card-header>
 
     <mat-card-content>
-      <!-- <mat-card-subtitle>{{message.title}}</mat-card-subtitle> -->
       <p>
         {{message.content}}
       </p>
-      <i>
-
-      </i>
     </mat-card-content>
     <mat-card-actions *ngIf="data.isAdmin">
       <button color="warn" mat-button (click)="deletePost(message.id)">Supprimer ce message non conforme</button>

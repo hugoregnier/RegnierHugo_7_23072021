@@ -15,7 +15,6 @@ export class DataService {
   authToken: any;
   isAuth$ = new BehaviorSubject<boolean>(false);
   username : any;
-  // bcrypt: any;
   profil = Object();
   isAdmin : any
 
@@ -51,7 +50,6 @@ export class DataService {
         this.profil.username = response.username
         this.profil.password = response.password
         this.profil.bio = response.bio
-        // this.userId = response.userId;
         resolve(true);
       },
       (error) => {
@@ -69,7 +67,6 @@ export class DataService {
         this.profil.username = response.username
         this.profil.password = response.password
         this.profil.bio = response.bio
-        // this.userId = response.userId;
         resolve(true);
       },
       (error) => {
@@ -119,7 +116,6 @@ export class DataService {
   }
 
   createMessage(content: string, topicId:any) {
-    // console.log(title, content, this.authToken, this.server)
     return new Promise((resolve, reject) => {
       this.http.post(this.server+"/messages/new", {content: content, topicId: topicId},{ headers: { 'Authorization': this.authToken }}).subscribe(
         (response:any) => {
@@ -134,7 +130,6 @@ export class DataService {
   }
 
   deleteMessage(messageId:any) {
-    // console.log(title, content, this.authToken, this.server)
     return new Promise((resolve, reject) => {
       this.http.put(this.server+"/messages/sup", {messageId: messageId},{ headers: { 'Authorization': this.authToken }}).subscribe(
         (response:any) => {
@@ -161,7 +156,6 @@ export class DataService {
 
 
   createTopic(title: string, content: string) {
-    // console.log(title, content, this.authToken, this.server)
     return new Promise((resolve, reject) => {
       this.http.post(this.server+"/topics/new", {title: title, content: content},{ headers: { 'Authorization': this.authToken }}).subscribe(
         (response:any) => {
@@ -178,9 +172,6 @@ export class DataService {
   getTopics() {
     this.secureget(this.server+"/topics",(response:any) => {
       this.topics = response
-      // for(let i in response){
-      //   this.userObject[response[i]._id] = response[i]
-      // }
       console.log(this.topics)
     })
   }

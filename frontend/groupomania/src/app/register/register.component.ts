@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 
@@ -8,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  registerForm: any;
+  submitted = false;
+
 
   email: string = ""
   username: string = ""
@@ -16,6 +21,7 @@ export class RegisterComponent implements OnInit {
   error: any
 
   constructor(
+    private formBuilder: FormBuilder,
     public data: DataService
     ,private router: Router
   ) { }
@@ -34,6 +40,27 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.registerForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      username: ['',  [Validators.required, Validators.minLength(5), Validators.maxLength(12)]],
+      pass: ['', [Validators.required, Validators.minLength(4)]],
+      bio: [''],
+  });
+  }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.registerForm.controls; }
+
+  onSubmit() {
+      this.submitted = true;
+
+      // stop here if form is invalid
+      if (this.registerForm.invalid) {
+          return;
+      }
+
+      // display form values on success
+      alert('Vous etes enregistré ! \n Cliquez sur OK et Connectez vous');
   }
 
 }

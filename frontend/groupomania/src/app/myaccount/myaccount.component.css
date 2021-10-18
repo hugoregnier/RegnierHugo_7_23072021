@@ -11,6 +11,12 @@ mat-card {
       max-width: 500px;
       width: 100%;
     }
+    .invalid-feedback {
+      display: block;
+      width: 100%;
+      color: red;
+    }
+    
     
     .example-full-width {
       width: 100%;

@@ -2,16 +2,21 @@
     <img class="imgLog" src="./assets/icon-left-font.png" />
     <mat-card-title>Modifier mes informations</mat-card-title>
     <mat-card-content>
-      <!-- <form [formGroup]="form" (ngSubmit)="submit()"> -->
-      <form class="example-form">
-  
+      <form class="example-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <table class="example-full-width">
           <tr>
             <td>
-              <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input matInput [(ngModel)]="email"  [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Email</mat-label>
+                  <input matInput [(ngModel)]="email" type="text" formControlName="email"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                </mat-form-field>
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">L'Email est requise</div>
+                  <div *ngIf="f.email.errors.email">L'adresse email doit-être vallide</div>
+                </div>
+              </div>
             </td>
           </tr>
         </table>
@@ -19,10 +24,20 @@
         <table class="example-full-width">
           <tr>
             <td>
-              <mat-form-field class="example-full-width">
-                <mat-label>Pseudo</mat-label>
-                <input matInput [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Pseudo</mat-label>
+                  <input matInput [(ngModel)]="username" type="text" formControlName="username"
+                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                </mat-form-field>
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                  <div *ngIf="f.username.errors.required">Le nom d`utilisateur est requis</div>
+                  <div *ngIf="f.username.errors.minlength">Le nom d`utilisateur doit être compris entre 5 et 12 caractères
+                  </div>
+                  <div *ngIf="f.username.errors.maxlength">Le nom d`utilisateur doit être compris entre 5 et 12 caractères
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         </table>
@@ -30,10 +45,17 @@
         <table class="example-full-width">
           <tr>
             <td>
-              <mat-form-field class="example-full-width">
-                <mat-label>Mot de passe</mat-label>
-                <input matInput [(ngModel)]="password" type="password" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Mot de passe</mat-label>
+                  <input type="password" matInput [(ngModel)]="password" formControlName="password"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                </mat-form-field>
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Mot de passe requis</div>
+                  <div *ngIf="f.password.errors.minlength">Mot de passe de 6 caractères minimum</div>
+                </div>
+              </div>
             </td>
           </tr>
         </table>
@@ -41,10 +63,12 @@
         <table class="example-full-width">
           <tr>
             <td>
-              <mat-form-field class="example-full-width">
-                <mat-label>bio</mat-label>
-                <textarea matInput [(ngModel)]="bio" [ngModelOptions]="{standalone: true}"></textarea>
-              </mat-form-field>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>bio</mat-label>
+                  <textarea matInput [(ngModel)]="bio" formControlName="bio"></textarea>
+                </mat-form-field>
+              </div>
             </td>
           </tr>
         </table>

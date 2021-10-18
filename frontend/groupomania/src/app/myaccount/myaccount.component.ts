@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-myaccount',
   templateUrl: './myaccount.component.html',
   styleUrls: ['./myaccount.component.css']
 })
 export class MyaccountComponent implements OnInit {
+  registerForm: any;
+  submitted = false;
+
   email = this.data.profil.email
   username = this.data.profil.username
   password = this.data.profil.password
@@ -16,11 +21,10 @@ export class MyaccountComponent implements OnInit {
   reponseM: any
   reponseD: any
 
-  // this.data.profil.email
-
   constructor(
-    public data: DataService
-    ,private router: Router
+    private formBuilder: FormBuilder,
+    public data: DataService,
+    private router: Router
   ) {
     if(!this.data.authToken){
       this.router.navigate(['/login']);
@@ -29,7 +33,6 @@ export class MyaccountComponent implements OnInit {
 
 
   modify() {
-    // console.log(this.title, this.content)
     this.data.modifyUser(this.email, this.username, this.password, this.bio)
     .then(res=>{
       if(res===true){
@@ -44,7 +47,6 @@ export class MyaccountComponent implements OnInit {
   }
 
   delete() {
-    // console.log(this.title, this.content)
     this.data.deleteUser(this.email, this.username, this.password, this.bio)
     .then(res=>{
       if(res===true){
@@ -61,8 +63,28 @@ export class MyaccountComponent implements OnInit {
     })
   }
 
-
   ngOnInit(): void {
+    this.registerForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      username: ['',  [Validators.required, Validators.minLength(5), Validators.maxLength(12)]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      bio: [''],
+  });
+  }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.registerForm.controls; }
+
+  onSubmit() {
+      this.submitted = true;
+
+      // stop here if form is invalid
+      if (this.registerForm.invalid) {
+          return;
+      }
+
+      // display form values on success
+      alert('Vous etes enregistré ! \n Cliquez sur OK et Connectez vous');
   }
 
 }
