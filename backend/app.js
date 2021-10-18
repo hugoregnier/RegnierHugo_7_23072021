@@ -6,14 +6,12 @@ const userRoutes = require('./routes/user.js')
 const messagesRoutes = require('./routes/messages.js')
 const topicsRoutes = require('./routes/topics.js')
 
-const bodyParser = require('body-parser');
 
 const helmet = require("helmet");
 app.use(helmet());
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 
   // Ces headers permettent :
