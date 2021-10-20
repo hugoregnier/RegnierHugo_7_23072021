@@ -8,17 +8,21 @@
   </div>
 
 
-  <mat-card class="postCard">
+  <mat-card class="postCard" *ngIf="data.topics">
     <mat-card-header class="titleWrapper">
       <mat-card-title>Poster votre sujet</mat-card-title>
       <mat-card-subtitle>
-        <input matInput #message maxlength="40" placeholder="Titre de votre message" [(ngModel)]="title">
+        <mat-form-field>
+          <input matInput #message maxlength="40" placeholder="Titre de votre message" [(ngModel)]="title">
+        </mat-form-field>
         <mat-hint align="start"><i> 40 caractères maximum </i></mat-hint>
         <mat-hint align="end">{{message.value.length}} / 40</mat-hint>
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
+      <mat-form-field>
       <textarea matInput placeholder="Votre message..." [(ngModel)]="content"></textarea>
+      </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="createSujet()">Poster</button>

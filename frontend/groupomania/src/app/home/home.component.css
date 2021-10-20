@@ -37,6 +37,9 @@ body {
  mat-hint {
    font-size: small;
  }
+ mat-form-field {
+   width: 100%;
+ }
   
   .example-full-width {
     width: 100%;

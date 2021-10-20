@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   connexion() {
-    console.log(this.connectForm.get('login').value, this.connectForm.get('pass').value)
     this.data.loginUser(this.connectForm.get('login').value, this.connectForm.get('pass').value)
       .then(res => {
         if (res === true) {

@@ -12,8 +12,8 @@ export class HomeComponent implements OnInit {
   title: string = ""
   content: string = ""
   error: any
-  topic: string = ""
-  comment: string = ""
+  // topic: string = ""
+  // comment: string = ""
 
 
 
@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
     this.data.createTopic(this.title, this.content)
       .then(res => {
         if (res === true) {
-          this.topic = "message poster !"
           this.title = ""
           this.content = ""
         }
