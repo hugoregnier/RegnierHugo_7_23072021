@@ -9,7 +9,7 @@
               <div class="form-group">
                 <mat-form-field class="example-full-width">
                   <mat-label>Email</mat-label>
-                  <input matInput [(ngModel)]="email" type="text" formControlName="email"
+                  <input matInput type="text" [value]="data.profil.email" formControlName="email"
                     [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                 </mat-form-field>
                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -27,7 +27,7 @@
               <div class="form-group">
                 <mat-form-field class="example-full-width">
                   <mat-label>Pseudo</mat-label>
-                  <input matInput [(ngModel)]="username" type="text" formControlName="username"
+                  <input matInput [value]="data.profil.username" type="text" formControlName="username"
                     [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
                 </mat-form-field>
                 <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -48,7 +48,7 @@
               <div class="form-group">
                 <mat-form-field class="example-full-width">
                   <mat-label>Mot de passe</mat-label>
-                  <input type="password" matInput [(ngModel)]="password" formControlName="password"
+                  <input type="password" matInput [value]="data.profil.password" formControlName="password"
                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                 </mat-form-field>
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -66,7 +66,7 @@
               <div class="form-group">
                 <mat-form-field class="example-full-width">
                   <mat-label>bio</mat-label>
-                  <textarea matInput [(ngModel)]="bio" formControlName="bio"></textarea>
+                  <textarea matInput [value]="data.profil.bio" formControlName="bio"></textarea>
                 </mat-form-field>
               </div>
             </td>

@@ -14,10 +14,10 @@ export class RegisterComponent implements OnInit {
   submitted = false;
 
 
-  email: string = ""
-  username: string = ""
-  pass: string = ""
-  bio : string = ""
+  // email: string = ""
+  // username: string = ""
+  // pass: string = ""
+  // bio : string = ""
   error: any
 
   constructor(
@@ -27,8 +27,9 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   register() {
-    console.log(this.email, this.username, this.pass, this.bio)
-    this.data.createUser(this.email, this.username, this.pass, this.bio)
+    // console.log(this.email, this.username, this.pass, this.bio)
+    // this.data.createUser(this.email, this.username, this.pass, this.bio)
+    this.data.createUser(this.registerForm.get('email').value, this.registerForm.get('username').value, this.registerForm.get('pass').value, this.registerForm.get('bio').value)
     .then(res=>{
       if(res===true){
         this.router.navigate(['/login']);

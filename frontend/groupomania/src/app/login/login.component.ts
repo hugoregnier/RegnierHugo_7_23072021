@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   connectForm: any;
   submitted = false;
 
-  login: string = ""
-  pass: string = ""
+  // login: string = ""
+  // pass: string = ""
   error: any
 
   constructor(
@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
   }
 
   connexion() {
-    console.log(this.login, this.pass)
-    this.data.loginUser(this.login, this.pass)
+    console.log(this.connectForm.get('login').value, this.connectForm.get('pass').value)
+    this.data.loginUser(this.connectForm.get('login').value, this.connectForm.get('pass').value)
       .then(res => {
         if (res === true) {
           this.router.navigate(['/home']);
@@ -50,11 +50,8 @@ export class LoginComponent implements OnInit {
 
   get f() { return this.connectForm.controls; }
 
-  onSubmit() {
-    console.log('ccccccff');
-    
+  onSubmit() {   
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.connectForm.invalid) {
         return;

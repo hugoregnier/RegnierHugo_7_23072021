@@ -33,7 +33,8 @@ export class MyaccountComponent implements OnInit {
 
 
   modify() {
-    this.data.modifyUser(this.email, this.username, this.password, this.bio)
+    // this.data.modifyUser(this.email, this.username, this.password, this.bio)
+    this.data.modifyUser(this.registerForm.get('email').value, this.registerForm.get('username').value, this.registerForm.get('password').value, this.registerForm.get('bio').value)
     .then(res=>{
       if(res===true){
         this.reponseM = "modification réussie"
@@ -47,7 +48,8 @@ export class MyaccountComponent implements OnInit {
   }
 
   delete() {
-    this.data.deleteUser(this.email, this.username, this.password, this.bio)
+    // this.data.deleteUser(this.email, this.username, this.password, this.bio)
+    this.data.deleteUser(this.registerForm.get('email').value, this.registerForm.get('username').value, this.registerForm.get('password').value, this.registerForm.get('bio').value)
     .then(res=>{
       if(res===true){
         this.reponseD = "suppression réussie"
@@ -70,6 +72,10 @@ export class MyaccountComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(4)]],
       bio: [''],
   });
+  this.registerForm.controls['email'].setValue(this.data.profil.email)
+  this.registerForm.controls['username'].setValue(this.data.profil.username)
+  this.registerForm.controls['password'].setValue(this.data.profil.password)
+  this.registerForm.controls['bio'].setValue(this.data.profil.bio)
   }
 
   // convenience getter for easy access to form fields
@@ -82,9 +88,6 @@ export class MyaccountComponent implements OnInit {
       if (this.registerForm.invalid) {
           return;
       }
-
-      // display form values on success
-      alert('Vous etes enregistré ! \n Cliquez sur OK et Connectez vous');
   }
 
 }
