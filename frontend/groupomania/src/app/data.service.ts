@@ -14,73 +14,73 @@ export class DataService {
   topics: any;
   authToken: any;
   isAuth$ = new BehaviorSubject<boolean>(false);
-  username : any;
+  username: any;
   profil = Object();
-  isAdmin : any
+  isAdmin: any
 
 
 
-  secureget(route:string, callback:any){
-    this.http.get(route, { headers: { 'Authorization': this.authToken }}).subscribe(callback)
+  secureget(route: string, callback: any) {
+    this.http.get(route, { headers: { 'Authorization': this.authToken } }).subscribe(callback)
   }
-  securepost(route:string, data:any, callback:any){
-    this.http.post(route, data,{ headers: { 'Authorization': this.authToken }}).subscribe(callback)
+  securepost(route: string, data: any, callback: any) {
+    this.http.post(route, data, { headers: { 'Authorization': this.authToken } }).subscribe(callback)
   }
 
   getUsername() {
-    this.secureget(this.server+"/user/me", (response:any) => {
+    this.secureget(this.server + "/user/me", (response: any) => {
       this.username = response.username;
       console.log(this.username)
     })
   }
 
   readUser() {
-    this.secureget(this.server+"/user/me", (response:any) => {
+    this.secureget(this.server + "/user/me", (response: any) => {
       this.profil = response;
 
       console.log(this.profil)
     })
   }
 
-  modifyUser(email: string, username: string , password: string, bio: string) {
+  modifyUser(email: string, username: string, password: string, bio: string) {
     return new Promise((resolve, reject) => {
-    this.http.put(this.server+"/user/me", {email, username, password, bio}, { headers: { 'Authorization': this.authToken }}).subscribe(
-      (response:any) => {
-        this.profil.email = response.email
-        this.profil.username = response.username
-        this.profil.password = response.password
-        this.profil.bio = response.bio
-        resolve(true);
-      },
-      (error) => {
-        reject(error);
-      }
+      this.http.put(this.server + "/user/me", { email, username, password, bio }, { headers: { 'Authorization': this.authToken } }).subscribe(
+        (response: any) => {
+          this.profil.email = response.email
+          this.profil.username = response.username
+          this.profil.password = response.password
+          this.profil.bio = response.bio
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
       );
     });
   }
 
-  deleteUser(email: string, username: string , password: string, bio: string) {
+  deleteUser(email: string, username: string, password: string, bio: string) {
     return new Promise((resolve, reject) => {
-    this.http.put(this.server+"/user/sup", {email, username, password, bio}, { headers: { 'Authorization': this.authToken }}).subscribe(
-      (response:any) => {
-        this.profil.email = response.email
-        this.profil.username = response.username
-        this.profil.password = response.password
-        this.profil.bio = response.bio
-        resolve(true);
-      },
-      (error) => {
-        reject(error);
-      }
+      this.http.put(this.server + "/user/sup", { email, username, password, bio }, { headers: { 'Authorization': this.authToken } }).subscribe(
+        (response: any) => {
+          this.profil.email = response.email
+          this.profil.username = response.username
+          this.profil.password = response.password
+          this.profil.bio = response.bio
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
       );
     });
   }
 
 
-  createUser(email: string, username: string , password: string, bio: string) {
+  createUser(email: string, username: string, password: string, bio: string) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.server+"/user/register", {email: email, username: username, password: password, bio: bio}).subscribe(
-        (response:any) => {
+      this.http.post(this.server + "/user/register", { email: email, username: username, password: password, bio: bio }).subscribe(
+        (response: any) => {
           resolve(true);
         },
         (error) => {
@@ -93,8 +93,8 @@ export class DataService {
 
   loginUser(email: string, password: string) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.server+"/user/login", {email: email, password: password}).subscribe(
-        (response:any) => {
+      this.http.post(this.server + "/user/login", { email: email, password: password }).subscribe(
+        (response: any) => {
           this.userId = response.userId;
           this.authToken = response.token;
           this.isAdmin = response.isAdmin;
@@ -115,10 +115,10 @@ export class DataService {
     });
   }
 
-  createMessage(content: string, topicId:any) {
+  createMessage(content: string, topicId: any) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.server+"/messages/new", {content: content, topicId: topicId},{ headers: { 'Authorization': this.authToken }}).subscribe(
-        (response:any) => {
+      this.http.post(this.server + "/messages/new", { content: content, topicId: topicId }, { headers: { 'Authorization': this.authToken } }).subscribe(
+        (response: any) => {
           this.getMessages(topicId)
           resolve(true);
         },
@@ -129,10 +129,10 @@ export class DataService {
     });
   }
 
-  deleteMessage(messageId:any) {
+  deleteMessage(messageId: any) {
     return new Promise((resolve, reject) => {
-      this.http.put(this.server+"/messages/sup", {messageId: messageId},{ headers: { 'Authorization': this.authToken }}).subscribe(
-        (response:any) => {
+      this.http.put(this.server + "/messages/sup", { messageId: messageId }, { headers: { 'Authorization': this.authToken } }).subscribe(
+        (response: any) => {
           resolve(true);
         },
         (error) => {
@@ -142,10 +142,10 @@ export class DataService {
     });
   }
 
-  
 
-  getMessages(id:any) {
-    this.securepost(this.server+"/messages", {topicId: id},(response:any) => {
+
+  getMessages(id: any) {
+    this.securepost(this.server + "/messages", { topicId: id }, (response: any) => {
       this.messages = response
       // for(let i in response){
       //   this.userObject[response[i]._id] = response[i]
@@ -157,8 +157,8 @@ export class DataService {
 
   createTopic(title: string, content: string) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.server+"/topics/new", {title: title, content: content},{ headers: { 'Authorization': this.authToken }}).subscribe(
-        (response:any) => {
+      this.http.post(this.server + "/topics/new", { title: title, content: content }, { headers: { 'Authorization': this.authToken } }).subscribe(
+        (response: any) => {
           this.getTopics()
           resolve(true);
         },
@@ -170,7 +170,7 @@ export class DataService {
   }
 
   getTopics() {
-    this.secureget(this.server+"/topics",(response:any) => {
+    this.secureget(this.server + "/topics", (response: any) => {
       this.topics = response
       console.log(this.topics)
     })
@@ -184,13 +184,8 @@ export class DataService {
     this.router.navigate(['login']);
   }
 
-
-
-
-
-
-  constructor(private http: HttpClient, private router: Router) { 
-    if(localStorage.getItem("authToken")){
+  constructor(private http: HttpClient, private router: Router) {
+    if (localStorage.getItem("authToken")) {
       this.authToken = localStorage.getItem("authToken");
       this.userId = localStorage.getItem("userId");
       this.isAdmin = localStorage.getItem("isAdmin");
@@ -199,5 +194,4 @@ export class DataService {
       this.readUser()
     }
   }
-  
 }

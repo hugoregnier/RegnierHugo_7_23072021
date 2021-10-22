@@ -54,6 +54,7 @@ export class MyaccountComponent implements OnInit {
       if(res===true){
         this.reponseD = "suppression réussie"
         this.data.logout();
+        alert("Votre compte à bien été supprimé");
         this.router.navigate(['/login']);
         console.log("suppression réussie");
         
@@ -69,7 +70,7 @@ export class MyaccountComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       username: ['',  [Validators.required, Validators.minLength(5), Validators.maxLength(12)]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       bio: [''],
   });
   this.registerForm.controls['email'].setValue(this.data.profil.email)
