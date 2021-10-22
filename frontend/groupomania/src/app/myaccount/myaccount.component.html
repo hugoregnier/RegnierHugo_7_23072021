@@ -48,7 +48,7 @@
               <div class="form-group">
                 <mat-form-field class="example-full-width">
                   <mat-label>Mot de passe</mat-label>
-                  <input type="password" matInput [value]="data.profil.password" formControlName="password"
+                  <input type="password" matInput formControlName="password"
                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                 </mat-form-field>
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
