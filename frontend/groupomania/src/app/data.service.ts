@@ -189,6 +189,7 @@ export class DataService {
       this.authToken = localStorage.getItem("authToken");
       this.userId = localStorage.getItem("userId");
       this.isAdmin = localStorage.getItem("isAdmin");
+      this.isAdmin = parseInt(this.isAdmin);
       this.isAuth$.next(true);
       this.getUsername()
       this.readUser()
